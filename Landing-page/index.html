@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WebCraft — Learn Web Dev</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Web<span>Craft</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Curriculum</a></li>
+    <li><a href="#">Projects</a></li>
+    <li><a href="#">Resources</a></li>
+    <li><a href="#">Community</a></li>
+    <li><a href="#" class="nav-cta">Start Free</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding: 0;">
+  <div class="hero-left">
+    <span class="hero-tag">Beginner-Friendly Course</span>
+    <h1 class="hero-title">
+      Build Beautiful<br/>Pages with <em>HTML</em><br/>& <em>CSS</em>
+    </h1>
+    <p class="hero-sub">
+      Master the fundamentals of web design — columns, sections, padding, color palettes, and layouts that don't overlap. Your first landing page awaits.
+    </p>
+    <div class="hero-buttons">
+      <a href="#" class="btn-primary">Start Learning Free</a>
+      <a href="#" class="btn-outline">View Projects</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="code-window">
+      <div class="code-topbar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <span class="code-title">index.html</span>
+      </div>
+      <div class="code-body">
+        <div><span class="c-comment">&lt;!-- Header Section --&gt;</span></div>
+        <div><span class="c-tag">&lt;header</span> <span class="c-attr">class=</span><span class="c-val">"hero"</span><span class="c-tag">&gt;</span></div>
+        <div>&nbsp;&nbsp;<span class="c-tag">&lt;h1&gt;</span>My Landing Page<span class="c-tag">&lt;/h1&gt;</span></div>
+        <div><span class="c-tag">&lt;/header&gt;</span></div>
+        <br/>
+        <div><span class="c-comment">/* styles.css */</span></div>
+        <div><span class="c-tag">.hero</span> {</div>
+        <div>&nbsp;&nbsp;<span class="c-prop">display</span>: <span class="c-val">flex</span>;</div>
+        <div>&nbsp;&nbsp;<span class="c-prop">padding</span>: <span class="c-num">4rem</span> <span class="c-num">2rem</span>;</div>
+        <div>&nbsp;&nbsp;<span class="c-prop">background</span>: <span class="c-val">#f5f0e8</span>;</div>
+        <div>&nbsp;&nbsp;<span class="c-prop">align-items</span>: <span class="c-val">center</span>;</div>
+        <div>}</div>
+        <br/>
+        <div><span class="c-tag">.columns</span> {</div>
+        <div>&nbsp;&nbsp;<span class="c-prop">display</span>: <span class="c-val">grid</span>;</div>
+        <div>&nbsp;&nbsp;<span class="c-prop">grid-template-columns</span>: <span class="c-val">1fr 1fr</span>;</div>
+        <div>&nbsp;&nbsp;<span class="c-prop">gap</span>: <span class="c-num">2rem</span>;</div>
+        <div>}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><span class="stat-num">12,000+</span><span class="stat-label">Students Enrolled</span></div>
+  <div class="stat"><span class="stat-num">48</span><span class="stat-label">Hands-On Lessons</span></div>
+  <div class="stat"><span class="stat-num">6</span><span class="stat-label">Real Projects</span></div>
+  <div class="stat"><span class="stat-num">4.9★</span><span class="stat-label">Average Rating</span></div>
+</div>
+
+<!-- SKILLS -->
+<section>
+  <span class="section-tag">What You'll Learn</span>
+  <h2 class="section-title">Everything you need to<br/>build a page from scratch</h2>
+  <p class="section-desc">Each concept is taught hands-on through real project work — no fluff, no filler.</p>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">▤</div>
+      <h3>Columns & Layout</h3>
+      <p>Divide your page into structured columns using CSS Grid and Flexbox without things breaking.</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">⬚</div>
+      <h3>Sections & Structure</h3>
+      <p>Learn to divide a page into semantic sections — headers, heroes, features, footers.</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">◈</div>
+      <h3>Box Model & Spacing</h3>
+      <p>Master padding, margin, and borders so elements breathe correctly and never overlap.</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">◑</div>
+      <h3>Color Palettes</h3>
+      <p>Build cohesive, beautiful color systems using CSS variables and intentional palette choices.</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">⊞</div>
+      <h3>Headers & Footers</h3>
+      <p>Build sticky navigation bars and well-structured footers with proper alignment and links.</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">✦</div>
+      <h3>Creativity & Polish</h3>
+      <p>Go beyond syntax — learn to make your page feel impressive through typography and visual rhythm.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TOPICS -->
+<section class="topics">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <span class="section-tag">Core Concepts</span>
+    <h2 class="section-title">Learn by building, not reading</h2>
+    <p class="section-desc">Every lesson ties directly to a visual outcome you can see and touch in the browser.</p>
+
+    <div class="topic-row">
+      <div class="topic-visual">
+        <div class="css-demo">
+          <div class="box-row">
+            <div class="box box-accent box-wide">Header</div>
+          </div>
+          <div class="box-row">
+            <div class="box box-green">Sidebar</div>
+            <div class="box box-muted box-wide">Main Content</div>
+          </div>
+          <div class="box-row">
+            <div class="box box-ink box-wide">Footer</div>
+          </div>
+        </div>
+      </div>
+      <div class="topic-text">
+        <h3>Page Structure & Sections</h3>
+        <p>A great page is a series of well-defined sections. You'll learn to map out a layout before writing a single line of code — header, hero, features, CTA, footer.</p>
+        <div class="tag-list">
+          <span class="tag">&lt;header&gt;</span>
+          <span class="tag">&lt;main&gt;</span>
+          <span class="tag">&lt;section&gt;</span>
+          <span class="tag">&lt;footer&gt;</span>
+          <span class="tag">semantic HTML</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-row reverse">
+      <div class="topic-visual">
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 60px; font-size: 0.7rem; color: var(--muted); font-family: monospace; text-align: right;">margin</div>
+            <div style="flex: 1; border: 2px dashed #c8a870; padding: 8px; border-radius: 4px;">
+              <div style="background: rgba(200,80,42,0.1); border: 2px dashed var(--accent); padding: 10px; border-radius: 3px; text-align: center; font-size: 0.75rem; font-family: monospace; color: var(--accent); font-weight: 500;">
+                padding → content ← padding
+              </div>
+            </div>
+          </div>
+          <div style="text-align: center; font-size: 0.75rem; color: var(--muted); font-family: monospace;">box-sizing: border-box</div>
+        </div>
+      </div>
+      <div class="topic-text">
+        <h3>Spacing & the Box Model</h3>
+        <p>Understanding margin, padding, and borders is the single biggest key to stopping elements from overlapping and making pages feel airy and professional.</p>
+        <div class="tag-list">
+          <span class="tag">margin</span>
+          <span class="tag">padding</span>
+          <span class="tag">border</span>
+          <span class="tag">box-sizing</span>
+          <span class="tag">overflow</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <span class="section-tag">Student Stories</span>
+  <h2 class="section-title">What our learners say</h2>
+  <p class="section-desc">Beginners who built real pages and never looked back.</p>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"I built my first landing page in weekend two. The box model lesson was the moment everything clicked for me."</p>
+      <div class="testi-author">
+        <div class="avatar av1">PR</div>
+        <div><div class="author-name">Priya R.</div><div class="author-role">Design Student</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"Finally understood why my elements were overlapping. CSS Grid changed everything about how I approach layouts."</p>
+      <div class="testi-author">
+        <div class="avatar av2">MK</div>
+        <div><div class="author-name">Miguel K.</div><div class="author-role">Career Switcher</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"The color palette section alone was worth it. My pages actually look professional now, not like homework."</p>
+      <div class="testi-author">
+        <div class="avatar av3">AL</div>
+        <div><div class="author-name">Anika L.</div><div class="author-role">Freelance Developer</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <span class="section-tag">Get Started Today</span>
+  <h2 class="section-title" style="max-width: 600px; margin: 0 auto 1rem;">Your first page is one lesson away</h2>
+  <p class="section-desc">Free to start. No credit card. Just open your editor and write your first &lt;div&gt;.</p>
+  <a href="#" class="btn-primary" style="font-size: 1rem; padding: 1rem 2.5rem;">Begin Your Journey →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <span class="logo">Web<span>Craft</span></span>
+    <p class="footer-desc">A beginner-first web development course teaching HTML and CSS through real project work.</p>
+  </div>
+  <div>
+    <h4>Curriculum</h4>
+    <ul class="footer-links">
+      <li><a href="#">HTML Basics</a></li>
+      <li><a href="#">CSS Fundamentals</a></li>
+      <li><a href="#">Layouts</a></li>
+      <li><a href="#">Projects</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Resources</h4>
+    <ul class="footer-links">
+      <li><a href="#">Cheat Sheets</a></li>
+      <li><a href="#">Color Tools</a></li>
+      <li><a href="#">Font Pairing</a></li>
+      <li><a href="#">Community</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Company</h4>
+    <ul class="footer-links">
+      <li><a href="#">About</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Privacy</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2026 WebCraft. All rights reserved.</span>
+  <span>Made with HTML &amp; CSS — just like you will be.</span>
+</div>
+
+</body>
+</html>
