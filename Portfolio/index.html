@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Alex Rivera — Frontend Developer & UI Designer crafting thoughtful digital experiences." />
+    <meta name="author" content="Alex Rivera" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Alex Rivera — Portfolio" />
+    <meta property="og:description" content="Frontend Developer & UI Designer" />
+    <meta property="og:type" content="website" />
+
+    <title>Alex Rivera — Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+
+  <body>
+
+    <!-- ========== NAVIGATION ========== -->
+    <header class="site-header" id="site-header">
+      <nav class="nav container" aria-label="Main navigation">
+        <a class="nav__logo" href="#hero" aria-label="Alex Rivera Home">A·R</a>
+        <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav__links" id="nav-links" role="list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Work</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+
+      <!-- ========== HERO ========== -->
+      <section class="hero" id="hero" aria-label="Introduction">
+        <div class="hero__text">
+          <p class="eyebrow animate-fade-up">Available for projects</p>
+          <h1 class="hero__name animate-fade-up delay-1">
+            Alex<br /><span class="accent">Rivera.</span>
+          </h1>
+          <p class="hero__bio animate-fade-up delay-2">
+            Frontend developer &amp; UI designer crafting thoughtful digital
+            experiences. I blend clean code with intentional design to build
+            things that feel as good as they look.
+          </p>
+          <div class="hero__ctas animate-fade-up delay-3">
+            <a class="btn btn--primary" href="#projects">View My Work</a>
+            <a class="btn btn--outline" href="assets/Alex-Rivera-CV.pdf" download>Download CV</a>
+          </div>
+        </div>
+
+        <div class="hero__image animate-fade-in delay-1" aria-hidden="true">
+          <span class="hero__tag">Frontend Dev · UI Design</span>
+          <div class="hero__avatar">
+            <!-- Replace with: <img src="assets/images/profile.jpg" alt="Alex Rivera" /> -->
+            <div class="avatar-placeholder">
+              <div class="avatar-placeholder__circle"></div>
+              <div class="avatar-placeholder__body"></div>
+            </div>
+          </div>
+          <div class="hero__stats">
+            <span class="stat-badge">5+ Years Experience</span>
+            <span class="stat-badge">30+ Projects Delivered</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== SKILLS ========== -->
+      <section class="skills" id="skills" aria-labelledby="skills-title">
+        <div class="container">
+          <p class="section-label">What I Do</p>
+          <h2 class="section-title" id="skills-title">Core Skills</h2>
+          <div class="skills__grid" id="skills-grid">
+            <!-- Skills rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== PROJECTS ========== -->
+      <section class="projects" id="projects" aria-labelledby="projects-title">
+        <div class="container">
+          <p class="section-label">Selected Work</p>
+          <h2 class="section-title" id="projects-title">Projects</h2>
+          <div class="projects__grid" id="projects-grid">
+            <!-- Projects rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== CONTACT ========== -->
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="container contact__inner">
+
+          <div class="contact__info">
+            <p class="section-label">Get In Touch</p>
+            <h2 class="section-title" id="contact-title">Let's work<br />together.</h2>
+            <p class="contact__desc">
+              Open to freelance projects, full-time roles, and interesting
+              collaborations. If you have something in mind, I'd love to hear
+              about it.
+            </p>
+            <ul class="contact__list" role="list" id="contact-list">
+              <!-- Contact items rendered by JS -->
+            </ul>
+          </div>
+
+          <form class="contact__form" id="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="your@email.com" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="What's this about?" />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell me about your project…" rows="5" required></textarea>
+            </div>
+            <p class="form-status" id="form-status" aria-live="polite"></p>
+            <button class="btn btn--send" type="submit">Send Message</button>
+          </form>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="site-footer">
+      <div class="container footer__inner">
+        <span class="footer__copy">&copy; <span id="year"></span> Alex Rivera. All rights reserved.</span>
+        <ul class="footer__links" role="list">
+          <li><a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a></li>
+          <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://dribbble.com" target="_blank" rel="noopener">Dribbble</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/main.js"></script>
+
+  </body>
+</html>
