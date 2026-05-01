@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ThermoConvert — Temperature Converter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+  </head>
+  <body>
+    <div class="bg-grid"></div>
+    <div class="orb orb--1"></div>
+    <div class="orb orb--2"></div>
+
+    <main class="app">
+      <header class="app__header">
+        <div class="logo">
+          <span class="logo__icon">⬡</span>
+          <span class="logo__text">ThermoConvert</span>
+        </div>
+        <p class="app__tagline">Precision temperature conversion</p>
+      </header>
+
+      <section class="converter-card">
+        <!-- Input Section -->
+        <div class="input-group">
+          <label class="input-group__label" for="temperatureInput">
+            Enter Temperature
+          </label>
+          <div class="input-wrapper">
+            <input
+              type="number"
+              id="temperatureInput"
+              class="input-group__field"
+              placeholder="0.00"
+              step="any"
+              autocomplete="off"
+              aria-describedby="inputError"
+            />
+            <span class="input-wrapper__unit" id="inputUnit">°C</span>
+          </div>
+          <p class="error-msg" id="inputError" role="alert" aria-live="polite"></p>
+        </div>
+
+        <!-- Unit Selector -->
+        <div class="unit-selector">
+          <p class="unit-selector__label">Convert from</p>
+          <div class="unit-selector__options" role="radiogroup" aria-label="Input unit">
+            <label class="unit-option" data-unit="C">
+              <input type="radio" name="inputUnit" value="C" checked />
+              <span class="unit-option__pill">
+                <span class="unit-option__symbol">°C</span>
+                <span class="unit-option__name">Celsius</span>
+              </span>
+            </label>
+            <label class="unit-option" data-unit="F">
+              <input type="radio" name="inputUnit" value="F" />
+              <span class="unit-option__pill">
+                <span class="unit-option__symbol">°F</span>
+                <span class="unit-option__name">Fahrenheit</span>
+              </span>
+            </label>
+            <label class="unit-option" data-unit="K">
+              <input type="radio" name="inputUnit" value="K" />
+              <span class="unit-option__pill">
+                <span class="unit-option__symbol">K</span>
+                <span class="unit-option__name">Kelvin</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Convert Button -->
+        <button class="convert-btn" id="convertBtn" type="button" aria-label="Convert temperature">
+          <span class="convert-btn__text">Convert</span>
+          <span class="convert-btn__icon">→</span>
+        </button>
+
+        <!-- Result Display -->
+        <div class="result" id="resultContainer" aria-live="polite" aria-atomic="true">
+          <div class="result__placeholder" id="resultPlaceholder">
+            <span class="result__hint">Your converted temperatures will appear here</span>
+          </div>
+          <div class="result__cards" id="resultCards" hidden>
+            <!-- Dynamically injected -->
+          </div>
+        </div>
+      </section>
+
+      <footer class="app__footer">
+        <p>Absolute zero: <strong>−273.15°C</strong> · <strong>−459.67°F</strong> · <strong>0 K</strong></p>
+      </footer>
+    </main>
+
+    <script src="js/constants.js"></script>
+    <script src="js/converter.js"></script>
+    <script src="js/validator.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

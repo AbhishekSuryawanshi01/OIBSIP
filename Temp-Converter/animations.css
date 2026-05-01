@@ -1,0 +1,106 @@
+/* animations.css — Keyframes & animation utilities */
+
+/* ── Page load ── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+@keyframes logoPulse {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50%       { transform: rotate(180deg) scale(1.1); }
+}
+
+/* ── Applied animations ── */
+.app__header {
+  animation: fadeUp var(--duration-slow) var(--ease-out-expo) both;
+}
+
+.converter-card {
+  animation: fadeUp var(--duration-slow) var(--ease-out-expo) 80ms both;
+}
+
+.app__footer {
+  animation: fadeUp var(--duration-slow) var(--ease-out-expo) 160ms both;
+}
+
+.logo__icon {
+  display: inline-block;
+  animation: logoPulse 6s ease-in-out infinite;
+}
+
+.result-card {
+  animation: scaleIn var(--duration-slow) var(--ease-spring) both;
+}
+
+.result-card:nth-child(1) { animation-delay: 0ms; }
+.result-card:nth-child(2) { animation-delay: 60ms; }
+
+.error-msg.is-visible {
+  animation: slideDown var(--duration-base) var(--ease-out-expo);
+}
+
+.input-group__field.shake {
+  animation: shake 350ms var(--ease-out-expo);
+}
+
+/* Utility class toggled by JS */
+.fade-in {
+  animation: fadeIn var(--duration-base) var(--ease-out-expo) both;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}

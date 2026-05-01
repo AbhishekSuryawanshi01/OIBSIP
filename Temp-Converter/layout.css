@@ -1,0 +1,101 @@
+/* layout.css — Page-level structure & background */
+
+body {
+  font-family: var(--font-mono);
+  background-color: var(--clr-bg);
+  color: var(--clr-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--space-6);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ── Decorative grid background ── */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(99, 202, 183, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 202, 183, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Ambient orbs ── */
+.orb {
+  position: fixed;
+  border-radius: var(--radius-full);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(80px);
+}
+
+.orb--1 {
+  width: 600px;
+  height: 600px;
+  background: var(--clr-orb-1);
+  top: -150px;
+  right: -100px;
+}
+
+.orb--2 {
+  width: 500px;
+  height: 500px;
+  background: var(--clr-orb-2);
+  bottom: -100px;
+  left: -150px;
+}
+
+/* ── App container ── */
+.app {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* ── Header ── */
+.app__header {
+  text-align: center;
+}
+
+.app__tagline {
+  font-size: var(--fs-sm);
+  color: var(--clr-text-secondary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: var(--space-2);
+}
+
+/* ── Footer ── */
+.app__footer {
+  text-align: center;
+  font-size: var(--fs-xs);
+  color: var(--clr-text-muted);
+  letter-spacing: 0.04em;
+}
+
+.app__footer strong {
+  color: var(--clr-text-secondary);
+  font-weight: 500;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  body {
+    padding: var(--space-4);
+    align-items: flex-start;
+    padding-top: var(--space-10);
+  }
+
+  .app {
+    gap: var(--space-6);
+  }
+}

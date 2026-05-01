@@ -1,0 +1,73 @@
+/* variables.css — Design tokens & custom properties */
+:root {
+  /* ── Colors ── */
+  --clr-bg:          #0b0f1a;
+  --clr-surface:     #111827;
+  --clr-surface-2:   #1a2236;
+  --clr-border:      rgba(255, 255, 255, 0.07);
+  --clr-border-focus:rgba(99, 202, 183, 0.5);
+
+  --clr-accent:      #63cab7;
+  --clr-accent-dim:  rgba(99, 202, 183, 0.12);
+  --clr-accent-glow: rgba(99, 202, 183, 0.25);
+
+  --clr-hot:         #ff6b6b;
+  --clr-cold:        #74b3ff;
+  --clr-kelvin:      #d4a5ff;
+
+  --clr-text-primary:   #f0f4ff;
+  --clr-text-secondary: #8b97b8;
+  --clr-text-muted:     #4a5568;
+
+  --clr-error:       #ff6b6b;
+  --clr-error-dim:   rgba(255, 107, 107, 0.12);
+
+  --clr-orb-1:       rgba(99, 202, 183, 0.07);
+  --clr-orb-2:       rgba(116, 179, 255, 0.05);
+
+  /* ── Typography ── */
+  --font-display: 'Syne', sans-serif;
+  --font-mono:    'DM Mono', monospace;
+
+  --fs-xs:   0.75rem;
+  --fs-sm:   0.875rem;
+  --fs-base: 1rem;
+  --fs-lg:   1.125rem;
+  --fs-xl:   1.5rem;
+  --fs-2xl:  2rem;
+  --fs-3xl:  2.5rem;
+  --fs-4xl:  3.5rem;
+
+  /* ── Spacing ── */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* ── Borders ── */
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-xl:   28px;
+  --radius-full: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-card:   0 0 0 1px var(--clr-border), 0 24px 48px rgba(0, 0, 0, 0.4);
+  --shadow-input:  0 0 0 1px var(--clr-border);
+  --shadow-focus:  0 0 0 2px var(--clr-border-focus);
+  --shadow-btn:    0 8px 24px rgba(99, 202, 183, 0.2);
+  --shadow-result: 0 0 0 1px var(--clr-border), 0 8px 20px rgba(0,0,0,0.3);
+
+  /* ── Transitions ── */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+}
