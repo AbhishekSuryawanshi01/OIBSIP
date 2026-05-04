@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taska — Daily Task Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <!-- Background decoration -->
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
+
+  <div class="app-wrapper">
+
+    <!-- HEADER -->
+    <header class="app-header">
+      <div class="header-brand">
+        <span class="brand-dot"></span>
+        <h1 class="brand-name">Taska</h1>
+      </div>
+      <div class="header-stats">
+        <div class="stat-pill" id="stat-total">
+          <span class="stat-num" id="count-total">0</span>
+          <span class="stat-label">Total</span>
+        </div>
+        <div class="stat-pill pending-pill" id="stat-pending">
+          <span class="stat-num" id="count-pending">0</span>
+          <span class="stat-label">Pending</span>
+        </div>
+        <div class="stat-pill done-pill" id="stat-done">
+          <span class="stat-num" id="count-done">0</span>
+          <span class="stat-label">Done</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ADD TASK FORM -->
+    <section class="add-task-section">
+      <div class="add-task-card">
+        <div class="add-task-inputs">
+          <div class="input-group">
+            <label class="input-label" for="task-input">New Task</label>
+            <input
+              type="text"
+              id="task-input"
+              class="task-input"
+              placeholder="What needs to be done today?"
+              maxlength="200"
+              autocomplete="off"
+            />
+          </div>
+          <div class="input-group input-group--priority">
+            <label class="input-label" for="priority-select">Priority</label>
+            <select id="priority-select" class="priority-select">
+              <option value="low">🟢 Low</option>
+              <option value="medium" selected>🟡 Medium</option>
+              <option value="high">🔴 High</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-add" id="btn-add" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Task
+        </button>
+      </div>
+      <div class="char-counter"><span id="char-count">0</span>/200</div>
+    </section>
+
+    <!-- EDIT MODAL -->
+    <div class="modal-overlay" id="edit-modal" role="dialog" aria-modal="true" aria-label="Edit Task">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2 class="modal-title">Edit Task</h2>
+          <button class="btn-modal-close" id="btn-modal-close" aria-label="Close">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group">
+            <label class="input-label" for="edit-input">Task</label>
+            <input type="text" id="edit-input" class="task-input" maxlength="200" autocomplete="off" />
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="edit-priority">Priority</label>
+            <select id="edit-priority" class="priority-select">
+              <option value="low">🟢 Low</option>
+              <option value="medium">🟡 Medium</option>
+              <option value="high">🔴 High</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-cancel" id="btn-cancel-edit">Cancel</button>
+          <button class="btn-save" id="btn-save-edit">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK LISTS -->
+    <main class="lists-grid">
+
+      <!-- PENDING TASKS -->
+      <section class="list-section" id="section-pending">
+        <div class="list-header">
+          <div class="list-header-left">
+            <span class="list-icon list-icon--pending">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </span>
+            <h2 class="list-title">Pending Tasks</h2>
+          </div>
+          <span class="list-badge badge--pending" id="badge-pending">0</span>
+        </div>
+
+        <div class="task-list" id="pending-list">
+          <!-- Empty state -->
+          <div class="empty-state" id="empty-pending">
+            <svg class="empty-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+            <p>All caught up! Add a task above.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPLETED TASKS -->
+      <section class="list-section" id="section-completed">
+        <div class="list-header">
+          <div class="list-header-left">
+            <span class="list-icon list-icon--done">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <h2 class="list-title">Completed Tasks</h2>
+          </div>
+          <span class="list-badge badge--done" id="badge-done">0</span>
+        </div>
+
+        <div class="task-list" id="completed-list">
+          <div class="empty-state" id="empty-completed">
+            <svg class="empty-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
+            <p>No completed tasks yet. Keep going!</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="app-footer">
+      <p>Tasks are saved locally · <span id="footer-date"></span></p>
+    </footer>
+
+  </div>
+
+  <!-- Scripts (order matters) -->
+  <script src="js/storage.js"></script>
+  <script src="js/taskManager.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
