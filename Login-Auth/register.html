@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register — AuthVault</title>
+  <link rel="stylesheet" href="../css/main.css" />
+</head>
+<body>
+  <div class="page">
+    <div class="auth-layout">
+
+      <!-- ── Left Hero ── -->
+      <aside class="auth-hero">
+        <div class="hero-badge"><span class="dot"></span> Free Forever</div>
+        <h1 class="hero-title">Start your<br/>secure journey.</h1>
+        <p class="hero-desc">Create your account in seconds. All passwords are hashed with bcrypt before storage — we never see your plain-text credentials.</p>
+        <div class="hero-features">
+          <div class="feature-item">
+            <div class="feature-icon">🧂</div>
+            <span>12-round bcrypt salt — industry best practice</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">✅</div>
+            <span>Server-side input validation on every field</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🚦</div>
+            <span>Rate-limited to 10 attempts per 15 minutes</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ── Right Form Panel ── -->
+      <main class="auth-panel">
+        <div class="auth-card fade-up">
+
+          <div class="auth-card-header">
+            <div class="logo">
+              <div class="logo-mark">🔑</div>
+              <span class="logo-text">AuthVault</span>
+            </div>
+            <h1 class="auth-title">Create account</h1>
+            <p class="auth-subtitle">Fill in your details to get started.</p>
+          </div>
+
+          <!-- Alert -->
+          <div class="alert" id="alert" role="alert"></div>
+
+          <!-- Form -->
+          <div id="registerForm">
+
+            <div class="form-group fade-up fade-up-2">
+              <label class="form-label" for="username">Username</label>
+              <div class="input-wrap">
+                <span class="input-icon">👤</span>
+                <input class="form-input" type="text" id="username" placeholder="cooluser123" autocomplete="username" />
+              </div>
+              <span class="field-error" id="usernameError"></span>
+            </div>
+
+            <div class="form-group fade-up fade-up-2">
+              <label class="form-label" for="email">Email Address</label>
+              <div class="input-wrap">
+                <span class="input-icon">📧</span>
+                <input class="form-input" type="email" id="email" placeholder="you@example.com" autocomplete="email" />
+              </div>
+              <span class="field-error" id="emailError"></span>
+            </div>
+
+            <div class="form-group fade-up fade-up-3">
+              <label class="form-label" for="password">Password</label>
+              <div class="input-wrap">
+                <span class="input-icon">🔒</span>
+                <input class="form-input" type="password" id="password" placeholder="Min 8 chars, letters + numbers" autocomplete="new-password" />
+                <button class="input-suffix" id="togglePw" type="button" aria-label="Toggle password visibility">👁</button>
+              </div>
+              <span class="field-error" id="passwordError"></span>
+              <!-- Strength meter -->
+              <div class="password-strength" id="strengthWrap" style="display:none;">
+                <div class="strength-bar" id="strengthBar">
+                  <div class="strength-segment"></div>
+                  <div class="strength-segment"></div>
+                  <div class="strength-segment"></div>
+                  <div class="strength-segment"></div>
+                </div>
+                <span class="strength-label" id="strengthLabel"></span>
+              </div>
+            </div>
+
+            <div class="form-group fade-up fade-up-3">
+              <label class="form-label" for="confirmPassword">Confirm Password</label>
+              <div class="input-wrap">
+                <span class="input-icon">🔒</span>
+                <input class="form-input" type="password" id="confirmPassword" placeholder="Repeat your password" autocomplete="new-password" />
+                <button class="input-suffix" id="toggleCPw" type="button" aria-label="Toggle confirm password visibility">👁</button>
+              </div>
+              <span class="field-error" id="confirmError"></span>
+            </div>
+
+            <div class="form-group fade-up fade-up-4" style="margin-top: 28px;">
+              <button class="btn btn-primary" id="registerBtn" type="button">
+                <span class="btn-label">Create Account</span>
+                <div class="btn-spinner"></div>
+              </button>
+            </div>
+
+          </div>
+
+          <div class="auth-switch fade-up fade-up-4">
+            Already have an account? <a class="link" href="login.html">Sign in</a>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/auth.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/ui.js"></script>
+  <script>
+    Auth.requireGuest();
+
+    const usernameInput     = document.getElementById("username");
+    const emailInput        = document.getElementById("email");
+    const passwordInput     = document.getElementById("password");
+    const confirmInput      = document.getElementById("confirmPassword");
+    const registerBtn       = document.getElementById("registerBtn");
+    const alertEl           = document.getElementById("alert");
+    const strengthWrap      = document.getElementById("strengthWrap");
+    const strengthBar       = document.getElementById("strengthBar");
+    const strengthLabel     = document.getElementById("strengthLabel");
+
+    UI.initPasswordToggle(document.getElementById("togglePw"), passwordInput);
+    UI.initPasswordToggle(document.getElementById("toggleCPw"), confirmInput);
+    UI.initPasswordStrength(passwordInput, strengthBar, strengthLabel);
+
+    // Show strength meter only when user starts typing
+    passwordInput.addEventListener("input", () => {
+      strengthWrap.style.display = passwordInput.value.length > 0 ? "block" : "none";
+    });
+
+    registerBtn.addEventListener("click", async () => {
+      UI.clearFieldErrors();
+      UI.hideAlert(alertEl);
+
+      const username = usernameInput.value.trim();
+      const email    = emailInput.value.trim();
+      const password = passwordInput.value;
+      const confirm  = confirmInput.value;
+
+      // Client-side validation
+      let valid = true;
+      if (!username || username.length < 3) {
+        UI.showFieldError(usernameInput, "Username must be at least 3 characters.");
+        valid = false;
+      }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        UI.showFieldError(emailInput, "Please enter a valid email.");
+        valid = false;
+      }
+      if (!password || password.length < 8) {
+        UI.showFieldError(passwordInput, "Password must be at least 8 characters.");
+        valid = false;
+      }
+      if (!/[A-Za-z]/.test(password) || !/[0-9]/.test(password)) {
+        UI.showFieldError(passwordInput, "Password must include letters and numbers.");
+        valid = false;
+      }
+      if (password !== confirm) {
+        UI.showFieldError(confirmInput, "Passwords do not match.");
+        valid = false;
+      }
+      if (!valid) return;
+
+      UI.setLoading(registerBtn, true);
+
+      try {
+        const data = await API.auth.register({ username, email, password });
+        Auth.save(data.accessToken, data.refreshToken, data.user);
+        UI.showAlert(alertEl, "success", "Account created! Redirecting to dashboard…");
+        setTimeout(() => { window.location.href = "dashboard.html"; }, 1000);
+      } catch (err) {
+        UI.showAlert(alertEl, "error", err.message || "Registration failed. Please try again.");
+        UI.setLoading(registerBtn, false);
+      }
+    });
+
+    [usernameInput, emailInput, passwordInput, confirmInput].forEach((el) =>
+      el.addEventListener("keydown", (e) => { if (e.key === "Enter") registerBtn.click(); })
+    );
+  </script>
+</body>
+</html>

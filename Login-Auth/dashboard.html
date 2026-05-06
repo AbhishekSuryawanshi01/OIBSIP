@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — AuthVault</title>
+  <link rel="stylesheet" href="../css/main.css" />
+</head>
+<body>
+  <div class="page">
+    <div class="dashboard-layout">
+
+      <!-- ── Navbar ── -->
+      <nav class="dashboard-nav fade-up">
+        <div class="logo">
+          <div class="logo-mark">🔑</div>
+          <span class="logo-text">AuthVault</span>
+        </div>
+        <div class="nav-actions">
+          <div class="avatar" id="avatarInitial">?</div>
+          <button class="btn btn-ghost" id="logoutBtn" style="width:auto; padding: 9px 18px;">
+            Sign Out
+          </button>
+        </div>
+      </nav>
+
+      <!-- Alert -->
+      <div class="alert" id="alert" role="alert" style="margin-bottom: 24px;"></div>
+
+      <!-- ── Welcome ── -->
+      <div class="welcome-section fade-up fade-up-2">
+        <h1>Welcome back, <span id="welcomeName">…</span> 👋</h1>
+        <p>You've successfully authenticated. Here's your session overview.</p>
+      </div>
+
+      <!-- ── Stats ── -->
+      <div class="stats-grid fade-up fade-up-3">
+        <div class="stat-card">
+          <div class="stat-icon">🔐</div>
+          <div class="stat-label">Auth Status</div>
+          <div class="stat-value" style="color: var(--success); font-size: 1.1rem;">Authenticated</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">👤</div>
+          <div class="stat-label">Account ID</div>
+          <div class="stat-value" id="statId">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📅</div>
+          <div class="stat-label">Joined</div>
+          <div class="stat-value" id="statJoined" style="font-size: 1rem;">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⏱️</div>
+          <div class="stat-label">Token Expires</div>
+          <div class="stat-value" id="statExpiry" style="font-size: 1rem;">—</div>
+        </div>
+      </div>
+
+      <!-- ── Profile Info ── -->
+      <div class="info-section fade-up fade-up-4">
+        <h2>📋 Profile &amp; Session Details</h2>
+        <div class="info-row">
+          <span class="key">Username</span>
+          <span class="val" id="infoUsername">—</span>
+        </div>
+        <div class="info-row">
+          <span class="key">Email</span>
+          <span class="val" id="infoEmail">—</span>
+        </div>
+        <div class="info-row">
+          <span class="key">Role</span>
+          <span class="val" id="infoRole">—</span>
+        </div>
+        <div class="info-row">
+          <span class="key">Session Active</span>
+          <span class="val"><span class="token-badge">✓ Active</span></span>
+        </div>
+        <div class="info-row">
+          <span class="key">Last Login</span>
+          <span class="val" id="infoLogin">—</span>
+        </div>
+        <div class="info-row">
+          <span class="key">Access Token (truncated)</span>
+          <span class="val" id="infoToken" style="font-family: monospace; font-size: 0.75rem; word-break: break-all; max-width: 280px; text-align: right;">—</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="../js/auth.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/ui.js"></script>
+  <script>
+    // Guard — redirect to login if not authenticated
+    if (!Auth.requireAuth()) throw new Error("Redirecting…");
+
+    const alertEl = document.getElementById("alert");
+
+    async function loadDashboard() {
+      try {
+        const data = await API.protected.dashboard();
+        const { user, stats } = data.data;
+
+        // Welcome
+        document.getElementById("welcomeName").textContent   = user.username;
+        document.getElementById("avatarInitial").textContent = user.username[0].toUpperCase();
+
+        // Stats cards
+        document.getElementById("statId").textContent = `#${user.id}`;
+        document.getElementById("statJoined").textContent = new Date(user.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+
+        // Decode JWT expiry
+        try {
+          const token   = Auth.getToken();
+          const payload = JSON.parse(atob(token.split(".")[1]));
+          const expDate = new Date(payload.exp * 1000);
+          document.getElementById("statExpiry").textContent = expDate.toLocaleTimeString();
+        } catch { document.getElementById("statExpiry").textContent = "1h"; }
+
+        // Info rows
+        document.getElementById("infoUsername").textContent = user.username;
+        document.getElementById("infoEmail").textContent    = user.email;
+        document.getElementById("infoRole").textContent     = stats.role.charAt(0).toUpperCase() + stats.role.slice(1);
+        document.getElementById("infoLogin").textContent    = new Date(stats.loginTime).toLocaleString();
+
+        const token = Auth.getToken();
+        document.getElementById("infoToken").textContent = token ? `${token.slice(0, 40)}…` : "—";
+
+      } catch (err) {
+        if (err.status === 401) {
+          UI.showAlert(alertEl, "error", "Session expired. Redirecting to login…");
+          setTimeout(() => Auth.logout(), 1500);
+        } else {
+          UI.showAlert(alertEl, "error", err.message || "Failed to load dashboard.");
+        }
+      }
+    }
+
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      try { await API.auth.logout(); } catch (_) {}
+      Auth.logout();
+    });
+
+    loadDashboard();
+  </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — AuthVault</title>
+  <link rel="stylesheet" href="../css/main.css" />
+</head>
+<body>
+  <div class="page">
+    <div class="auth-layout">
+
+      <!-- ── Left Hero ── -->
+      <aside class="auth-hero">
+        <div class="hero-badge"><span class="dot"></span> Secure Access</div>
+        <h1 class="hero-title">Your gateway<br/>to secure apps.</h1>
+        <p class="hero-desc">Industry-standard JWT authentication with bcrypt password hashing, rate limiting, and protected routes.</p>
+        <div class="hero-features">
+          <div class="feature-item">
+            <div class="feature-icon">🔐</div>
+            <span>bcrypt password hashing with 12 salt rounds</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">⚡</div>
+            <span>Stateless JWT access + refresh tokens</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🛡️</div>
+            <span>Rate limiting & Helmet security headers</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ── Right Form Panel ── -->
+      <main class="auth-panel">
+        <div class="auth-card fade-up">
+
+          <div class="auth-card-header">
+            <div class="logo">
+              <div class="logo-mark">🔑</div>
+              <span class="logo-text">AuthVault</span>
+            </div>
+            <h1 class="auth-title">Welcome back</h1>
+            <p class="auth-subtitle">Sign in to your account to continue.</p>
+          </div>
+
+          <!-- Alert -->
+          <div class="alert" id="alert" role="alert"></div>
+
+          <!-- Form -->
+          <div id="loginForm">
+
+            <div class="form-group fade-up fade-up-2">
+              <label class="form-label" for="email">Email Address</label>
+              <div class="input-wrap">
+                <span class="input-icon">📧</span>
+                <input class="form-input" type="email" id="email" placeholder="you@example.com" autocomplete="email" />
+              </div>
+              <span class="field-error" id="emailError"></span>
+            </div>
+
+            <div class="form-group fade-up fade-up-3">
+              <label class="form-label" for="password">Password</label>
+              <div class="input-wrap">
+                <span class="input-icon">🔒</span>
+                <input class="form-input" type="password" id="password" placeholder="••••••••" autocomplete="current-password" />
+                <button class="input-suffix" id="togglePw" type="button" aria-label="Toggle password visibility">👁</button>
+              </div>
+              <span class="field-error" id="passwordError"></span>
+            </div>
+
+            <div class="form-group fade-up fade-up-4" style="margin-top: 28px;">
+              <button class="btn btn-primary" id="loginBtn" type="button">
+                <span class="btn-label">Sign In</span>
+                <div class="btn-spinner"></div>
+              </button>
+            </div>
+
+          </div>
+
+          <div class="auth-switch fade-up fade-up-4">
+            Don't have an account? <a class="link" href="register.html">Create one</a>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/auth.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/ui.js"></script>
+  <script>
+    // Redirect if already logged in
+    Auth.requireGuest();
+
+    const emailInput    = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const loginBtn      = document.getElementById("loginBtn");
+    const alert         = document.getElementById("alert");
+    const togglePw      = document.getElementById("togglePw");
+
+    UI.initPasswordToggle(togglePw, passwordInput);
+
+    loginBtn.addEventListener("click", async () => {
+      UI.clearFieldErrors();
+      UI.hideAlert(alert);
+
+      const email    = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      // Basic client-side checks
+      if (!email) return UI.showFieldError(emailInput, "Email is required.");
+      if (!password) return UI.showFieldError(passwordInput, "Password is required.");
+
+      UI.setLoading(loginBtn, true);
+
+      try {
+        const data = await API.auth.login({ email, password });
+        Auth.save(data.accessToken, data.refreshToken, data.user);
+        UI.showAlert(alert, "success", "Login successful! Redirecting…");
+        setTimeout(() => { window.location.href = "dashboard.html"; }, 900);
+      } catch (err) {
+        UI.showAlert(alert, "error", err.message || "Login failed. Please try again.");
+        UI.setLoading(loginBtn, false);
+      }
+    });
+
+    // Allow Enter key submit
+    [emailInput, passwordInput].forEach((el) =>
+      el.addEventListener("keydown", (e) => { if (e.key === "Enter") loginBtn.click(); })
+    );
+  </script>
+</body>
+</html>
